@@ -8,7 +8,7 @@
 
 如图所示
 
-![lbG7hF.png](https://s2.ax1x.com/2020/01/14/lbG7hF.png)
+![](https://s2.ax1x.com/2020/01/14/lbG7hF.png)
 
 ## MUMmer的运行
 
@@ -48,7 +48,7 @@ show-coords ./A2-At.delta
 
 得到的文件大致如下
 
-![lbGTtU.png](https://s2.ax1x.com/2020/01/14/lbGTtU.png)
+![](https://s2.ax1x.com/2020/01/14/lbGTtU.png)
 
 其中，1、2列是reference的对应染色体的起始与终止，3、4列是query对应的染色体的起始与终止、5、6列分别是前四列对应的片段长度、6、7列是对应的染色体长度、8、9列是对应的染色体编号
 
@@ -62,7 +62,7 @@ PAVs主要是分为两个方面，下面我一个一个进行阐述
 
 首先，这个的寻找需要我们在运行MUMmer过程中，将At作为参考基因组去运行，最后得到坐标的位置的时候我们要以A2基因组的顺序进行排列，得到的坐标文件如图所示
 
-[![lbJvvj.png](https://s2.ax1x.com/2020/01/14/lbJvvj.png)](https://imgchr.com/i/lbJvvj)
+[![](https://s2.ax1x.com/2020/01/14/lbJvvj.png)](https://imgchr.com/i/lbJvvj)
 
 我们需要每一条染色体的去寻找，下面我们就以A2上的一号染色体为例去说明
 
@@ -81,7 +81,7 @@ bedtools merge -i  tmpsort.bed >match.bed : 将区间进行合并
 
 得到的文件如下图所示
 
-[![lb0D7d.png](https://s2.ax1x.com/2020/01/14/lb0D7d.png)](https://imgchr.com/i/lb0D7d)
+[![](https://s2.ax1x.com/2020/01/14/lb0D7d.png)](https://imgchr.com/i/lb0D7d)
 
 最后我们就可以用awk指令将**第n个区间的终止当作第n个区间的起始，第n+1个区间的起始当作第n个区间的终止**（这句话要好好理解下），就得到了A2在进化过程中PAVs的片段了，指令如下：
 
@@ -91,7 +91,7 @@ awk '{a[NR][1]=$1;a[NR][2]=$2;a[NR][3]=$3;}END{for(i=1;i<=NR-1;i++){print a[i][1
 
 结果如图所示
 
-[![lbDQo9.png](https://s2.ax1x.com/2020/01/14/lbDQo9.png)](https://imgchr.com/i/lbDQo9)
+[![](https://s2.ax1x.com/2020/01/14/lbDQo9.png)](https://imgchr.com/i/lbDQo9)
 
 后续我们可以进行筛选统计
 
