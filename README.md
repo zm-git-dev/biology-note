@@ -100,6 +100,29 @@ awk '{a=$3-$2}{if(a>100){print $0}}' PAVs.bed ： 筛选小于100bp的片段
 awk '{a=$3-$2}{if(a>100){print a}}' PAVs.bed |awk '{sum+=$1} END {print sum}'|cat ：统计A2一号染色体上PAVs总长度
 ```
 
+最近了一个bash脚本，可以把前面得到坐标文件的后续步骤统一处理，并且可以对13条染色体统一处理，脚本如下
+
+```bash
+for i in 01 02 03 04 05 06 07 08 09 10 11 12 13
+do
+        awk  '/.*Ghir_A.*Chr'$i'/{print "Ghir_A""'$i'" "\t" $4 "\t" $5}' At_A2.coords |awk '{if($3<$2){print $1 "\t" $3 "\t" $2} else {print $0}}' >"$i".bed
+        sort -k2 -n "$i".bed >"$i"sort.bed
+        bedtools merge -i  "$i"sort.bed >"$i"match.bed
+        awk '{a[NR][1]=$1;a[NR][2]=$2;a[NR][3]=$3;}END{for(q=1;q<=NR-1;q++){print a[q][1]"\t"a[q][3]"\t"a[q+1][2]}}' "$i"match.bed >A2"$i"PAV.bed
+        rm "$i".bed "$i"sort.bed "$i"match.bed
+        awk '{a=$3-$2}{if(a>100){print a}}' A2"$i"PAV.bed |awk '{sum+=$1} END {print sum}'|cat
+done
+
+```
+
+注意之前要下载bedtools并且加入环境变量中，并且要将环境的变量写入bash脚本中，查看当前的环境变量的指令如下
+
+```bash
+echo $PATH
+```
+
+
+
 ### A2到At过程中，At基因组上present的片段
 
 这个的分析和之前的一样，只是要在一开始运行MUMmer的时候把A2当作参考基因组，按照之前的步骤进行之后，就可以得到At一号染色体present的片段了。
