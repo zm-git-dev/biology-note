@@ -110,7 +110,8 @@ do
         bedtools merge -i  "$i"sort.bed >"$i"match.bed
         awk '{a[NR][1]=$1;a[NR][2]=$2;a[NR][3]=$3;}END{for(q=1;q<=NR-1;q++){print a[q][1]"\t"a[q][3]"\t"a[q+1][2]}}' "$i"match.bed >A2"$i"PAV.bed
         rm "$i".bed "$i"sort.bed "$i"match.bed
-        awk '{a=$3-$2}{if(a>100){print a}}' A2"$i"PAV.bed |awk '{sum+=$1} END {print sum}'|cat
+        awk '{a=$3-$2}{if(a>100){print a}}' At"$i"PAV.bed |awk '{sum+=$1} END {print "Ghir_A""'$i'" "\t" sum}' >>statistics1.txt
+        awk '{a=$3-$2}{if(a>10000){print a}}' At"$i"PAV.bed |wc -l >>statistics2.txt
 done
 
 ```
