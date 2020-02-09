@@ -113,7 +113,8 @@ do
         awk '{a=$3-$2}{if(a>100){print a}}' At"$i"PAV.bed |awk '{sum+=$1} END {print "Ghir_A""'$i'" "\t" sum}' >>statistics1.txt
         awk '{a=$3-$2}{if(a>10000){print a}}' At"$i"PAV.bed |wc -l >>statistics2.txt
 done
-
+paste statistics1.txt statistics2.txt >statistics.txt
+rm statistics2.txt statistics1.txt
 ```
 
 注意之前要下载bedtools并且加入环境变量中，并且要将环境的变量写入bash脚本中，查看当前的环境变量的指令如下

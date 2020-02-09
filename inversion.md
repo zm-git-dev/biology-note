@@ -36,3 +36,18 @@ awk '{a=$3-$2}{if(a>100){print a}}' At01inversion.bed |awk '{sum+=$1} END {print
 ------
 
 其他的染色体就可以按照这个步骤进行查询、筛选和统计了
+
+最近写了一个baah脚本，可以批量处理，写在下面
+
+```bash
+for i in 01 02 03 04 05 06 07 08 09 10 11 12 13
+do
+        awk '/.*Chr'$i'.*Ghir_A'$i'/{if($5<$4){print "Ghir_A""'$i'" "\t" $5 "\t" $4}}' ../A2At.coord|sort -k2 -n >"$i".bed
+        bedtools merge -i "$i".bed >At"$i"inversion.bed
+        awk '{a=$3-$2}{if(a>100){print $0}}' At"$i"inversion.bed >At"$i".bed
+        awk '{a=$3-$2}{if(a>100){print a}}' At"$i"inversion.bed |awk '{sum+=$1} END {print "Ghir_A""'$i'" "\t" sum}' >>statistics.txt
+        rm "$i".bed At"$i"inversion.bed
+done
+
+```
+
