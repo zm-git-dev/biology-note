@@ -8,7 +8,7 @@
 
 首先在[这里](http://circos.ca/software/download/circos/)下载到最新的Circos软件包，这里主要介绍linux版本，Circos本身是基于Perl的，所以不需要编译安装。解压下载的软件包到你想要存放的位置，并将circos/bin加入环境变量即可。它依赖较多的Perl模块，可以用`circos -module`查看相关Perl模块的安装情况。如果全部安装完毕，结果如图所示
 
-![](C:\Users\DELL\Desktop\公众号\1.PNG)
+![8RAyfP.png](https://s1.ax1x.com/2020/03/21/8RAyfP.png)
 
 如果安装模块儿出现问题，别着急，之后会有文章详细介绍模块儿的安装哦
 
@@ -16,7 +16,7 @@
 
 Circos包里有自己的demo，可通过`circos -conf yourpath/circos/example/etc/circos.conf`来运行，如果你成功的在命令行当前目录下生成png和svg两个图形文件。如下图所示，那么恭喜你已经完成了第一步并且得到了一个十分漂亮的图。
 
-![](C:\Users\DELL\Desktop\公众号\circos.png)
+![8RAIkn.png](https://s1.ax1x.com/2020/03/21/8RAIkn.png)
 
 ## 数据文件格式
 
@@ -87,7 +87,7 @@ circos -conf ./circos.conf
 
 就可以得到这样的一张图片
 
-![](C:\Users\DELL\Desktop\公众号\circos (2).png)
+![8RAcSf.png](https://s1.ax1x.com/2020/03/21/8RAcSf.png)
 
 下面我们就对上述代码中涉及到模块儿进行学习，包括karyotype、ideogram、ticks等模块。
 
@@ -117,7 +117,7 @@ chromosomes_radius	= hs1:1.15r;hs2:1.05r
 
 图片会变成下面这个样子
 
-![](C:\Users\DELL\Desktop\公众号\circos3.png)
+![8RAhwj.png](https://s1.ax1x.com/2020/03/21/8RAhwj.png)
 
 ### Ideogram
 
@@ -151,7 +151,7 @@ label_parallel   = yes
 
 我们的圈图就变成了下面这个样子
 
-![](C:\Users\DELL\Desktop\公众号\circos4.png)
+![8RAROg.png](https://s1.ax1x.com/2020/03/21/8RAROg.png)
 
 ### Ticks
 
@@ -202,4 +202,4 @@ label_radius     = dims(ideogram,radius_outer) + 250p
 
 最终我们就得到的圈图，如下图所示
 
-![](C:\Users\DELL\Desktop\公众号\circos 5.png)
+![8RAfmQ.png](https://s1.ax1x.com/2020/03/21/8RAfmQ.png)
