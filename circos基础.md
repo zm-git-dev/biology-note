@@ -203,3 +203,28 @@ label_radius     = dims(ideogram,radius_outer) + 250p
 最终我们就得到的圈图，如下图所示
 
 ![8RAfmQ.png](https://s1.ax1x.com/2020/03/21/8RAfmQ.png)
+
+最后我们的配置circos.conf文件就变成了
+
+```
+#karyotypes
+<<include karyotype.conf>>
+
+# Ideograms
+<<include ideogram.conf>>
+
+# Image
+<image>
+<<include etc/image.conf>>
+</image>
+
+#Ticks
+<<include ticks.conf>>
+
+# RGB/HSV color definitions, color lists, location of fonts, fill patterns.
+<<include etc/colors_fonts_patterns.conf>>
+
+# Debugging, I/O and other system parameters
+<<include etc/housekeeping.conf>>
+```
+
