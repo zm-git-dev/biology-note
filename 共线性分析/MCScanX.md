@@ -140,7 +140,7 @@ blastp -query Dt.fasta -db Atdb -out At-Dt.blast -evalue 1e-10 -num_threads 30 -
 
 ## 软件的运行
 
-将上一步生成的At-Dt.blast和At-Dt.gff放到新建的At-Dt文件夹内，然后输入指令
+将上一步生成的At-Dt.blast和At-Dt.gff放到新建的At-Dt文件夹内，然后进入文件夹里输入指令
 
 ```
 MCScanX ./At-Dt

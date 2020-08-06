@@ -1,0 +1,23 @@
+交互模式
+
+```
+bsub -q interactive  -Is bash
+```
+
+官网：https://github.com/tanghaibao/jcvi/wiki/MCscan-(Python-version)
+
+```
+python -m jcvi.formats.gff bed --type=gene --key=Name ~/data/D5/D5/D5_genes.gff3 -o D5.bed
+bedtools  getfasta -fi ~/data/D5/D5.fa -bed D5.bed -name -fo D5.cds -s
+sed -i 's/::.*//g' D5.cds
+python -m jcvi.compara.catalog ortholog A2 At --no_strip_names
+python -m jcvi.compara.synteny screen --minspan=30 --simple A2.At.anchors A2.At.anchors.new
+python -m jcvi.graphics.karyotype seqids layout
+```
+
+画图之前要加载模块儿
+
+```bash
+module load texlive
+```
+
