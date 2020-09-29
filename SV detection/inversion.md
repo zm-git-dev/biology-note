@@ -11,4 +11,28 @@ grep -w -A 1 '1!' tmp.coord|awk '/1!$/{print $0}'|sort -k18 |uniq |awk '/.*Chr01
 |awk '{a[NR][1]=$2}{a[NR][2]=$3}{a[NR][3]=$5}{a[NR][4]=$6}{a[NR][5]=$0}END{for(q=1;q<=NR;q=q+1){b=a[q][2]-a[q+1][1];c=a[q][4]-a[q+1][3];if(b>-1000&&b<1000&&c>-1000&&c<1000){$1 "\t" a[q][1] "\t" a[q+1][2] "\t" $4 "\t" a[q][3] "\t" a[q+1][4] ;q=q+1}else{print a[q][5]}}}'
 |awk '{a[NR][1]=$2}{a[NR][2]=$3}{a[NR][3]=$5}{a[NR][4]=$6}{a[NR][5]=$0}END{for(q=1;q<=NR;q=q+1){b=a[q][2]-a[q+1][1];c=a[q][4]-a[q+1][3];if(b>-1000&&b<1000&&c>-1000&&c<1000){$1 "\t" a[q][1] "\t" a[q+1][2] "\t" $4 "\t" a[q][3] "\t" a[q+1][4] ;q=q+1}else{print a[q][5]}}}'
 |awk '{a[NR][1]=$2}{a[NR][2]=$3}{a[NR][3]=$5}{a[NR][4]=$6}{a[NR][5]=$0}END{for(q=1;q<=NR;q=q+1){b=a[q][2]-a[q+1][1];c=a[q][4]-a[q+1][3];if(b>-1000&&b<1000&&c>-1000&&c<1000){$1 "\t" a[q][1] "\t" a[q+1][2] "\t" $4 "\t" a[q][3] "\t" a[q+1][4] ;q=q+1}else{print a[q][5]}}}'|	#将gap<1000bp的进行合并
+
+#!/bin/bash
+awk '$1~/^[0-9]/{a=substr($18,4,2)}{b=substr($19,7,2)}{if($5<$4&&a==b){print $0}}' ../1.coords |\
+xargs -I {} grep {} -A 1 -B 1 ../1.coords |\
+awk '{if($4>$5){print $0 "\t" "|" "\t" "1!"}else{print $0 "\t" "|" "\t" "0!"}}' |\
+awk '{a[NR][1]=$21}{a[NR][2]=$0}END{for(q=1;q<=NR;q=q+1){if(a[q][1]=="0!"){print a[q][2] "\n" a[q][2]}else{print a[q][2]}}}' >tmp.coord
+
+for i in 01 02 03 04 05 06 07 08 09 10 11 12 13
+do
+grep -w -A 1 '1!' tmp.coord|awk '/1!$/{print $0}'|\
+sort -k18 |uniq |\
+awk '/.*Chr'$i'\tGhir_A'$i'.*/{print $0}'|sort -n -k1 |\
+awk '{print $18 "\t" $1 "\t" $2 "\t" $19 "\t" $4 "\t" $5}' >"$i"_0.tmp
+        for ((q=1;q<=100;q=q+1))
+        do
+                let x=q-1
+                awk '{a[NR][1]=$2}{a[NR][2]=$3}{a[NR][3]=$5}{a[NR][4]=$6}END{for(q=1;q<=NR;q=q+1){b=a[q][2]-a[q+1][1];c=a[q][4]-a[q+1][3];\
+                if(b>-10000&&b<10000&&c>-10000&&c<10000){print $1 "\t" a[q][1] "\t" a[q+1][2] "\t" $4 "\t" a[q][3] "\t" a[q+1][4] ;q=q+1}\
+                else{print $1 "\t" a[q][1] "\t" a[q][2] "\t" $4 "\t" a[q][3] "\t" a[q][4]}}}' "$i"_"$x".tmp >"$i"_"$q".tmp
+                rm "$i"_"$x".tmp
+        done
+mv "$i"_100.tmp A"$i"_raw_inv.txt
+done
+
 ```

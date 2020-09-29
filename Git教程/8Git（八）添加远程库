@@ -1,0 +1,87 @@
+# Git系列（八）——添加远程库
+
+ 现在我们已经成功创建了Github帐号并且绑定了我们自己的电脑，那我们就来学习一下如何添加远程仓库。
+
+------
+
+## 创建远程库
+
+具体操作如下图所示
+
+<img src="https://s1.ax1x.com/2020/08/30/dbiYJP.png" alt="1.png" style="zoom:33%;" />
+
+仓库名称和本地的保持一致都为`learngit`，输入后点击`create repository`即可
+
+<img src="https://s1.ax1x.com/2020/08/30/dbi3dA.png" alt="2.png" style="zoom:33%;" />
+
+## 关联本地仓库
+
+创建成功后Github会显示如下界面，图中红色框框圈起来的就是关键本地仓库的指令。
+
+<img src="https://s1.ax1x.com/2020/08/30/dbi8II.png" alt="3.png" style="zoom:33%;" />
+
+我们只需要在本地的仓库下输入上述指令：
+
+```
+$ git remote add origin git@github.com:yxlong-science/learngit.git
+```
+
++ 注意，一定是自己的邮箱和路径，不要直接复制粘贴，不然就关联到我的远程库了
++ `README.md`文件是Github默认的介绍文件，会显示在仓库的首页，对项目进行一个简要的介绍，在创建仓库时可以选择自动创建，推荐大家创建一个
+
+## 推送
+
+关联成功以后，远程库的名字就是`origin`，这个是默认名字，一般我们也不会修改，一看到`origin`我们就知道这是一个远程库。
+
+这个远程库现在还是空空如也的，我们就可以通过下面这个指令将本地的库的文件推动到远程库：
+
+```
+$ git push -u origin master
+Counting objects: 12, done.
+Delta compression using up to 40 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (12/12), 994 bytes | 0 bytes/s, done.
+Total 12 (delta 0), reused 0 (delta 0)
+To git@github.com:yxlong-science/learngit.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+```
+
+将本地的库推送到远程用的是`git push`，第一次推送时要加上`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+可以看到，远程库和本地库完全一样了。
+
+<img src="https://s1.ax1x.com/2020/08/30/dbitRf.png" alt="4.png" style="zoom:33%;" />
+
+以后，如果本地做了修改，就可以简单的通过下面的指令推送到远程了：
+
+```
+$ git push origin master
+```
+
+## 拉取
+
+从远程库拉取，我们需要下述指令：
+
+```
+$ git pull origin master
+From github.com:yxlong-science/learngit
+ * branch            master     -> FETCH_HEAD
+Already up-to-date.
+```
+
++ 一个项目如果是多人协作时，每次在本地修改之前，我们都要先`git pull`，不然再一次提交时就可能会覆盖别人的修改。
+
+## 克隆
+
+多人修改一个项目时，我们就可以用命令`git clone`克隆一个本地库。
+
+```
+$ git clone git@github.com:yxlong-science/learngit.git
+```
+
+指令的最后是仓库的地址，克隆好了以后，就可以进行多人修改了。
+
+------
+
+从此，你就拥有了真正的分布式版本库了，之后我们会学习Git的最后一部分分支和标签的管理。
