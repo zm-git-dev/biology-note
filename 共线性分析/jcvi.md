@@ -21,8 +21,6 @@ python -m jcvi.graphics.karyotype seqids layout
 module load texlive
 ```
 
-![](C:\Users\DELL\Desktop\国创\matplotlib-color-1024x1008.png)
-
 ```
 13种颜色
 1 red

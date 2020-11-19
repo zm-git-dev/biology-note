@@ -56,7 +56,7 @@ java -jar  ~/software/Trimmomatic-0.39/trimmomatic-0.39.jar
 PE 
 -threads 10 
 R1.fastq.gz
-R2.fastq.gz 
+R2.fastq.gz
 -baseout 输出文件目录/文件前称
 ILLUMINACLIP:/public/home/zpliu/software/Trimmomatic-0.39/adapters/TruSeq3-PE-2.fa:2:30:10  LEADING:10 TRAILING:10 SLIDINGWINDOW:4:20 MINLEN:50
 
